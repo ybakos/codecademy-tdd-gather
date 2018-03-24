@@ -25,8 +25,23 @@
           <h2 class="form-title">Create an Item</h2>
 
           <form class="input-form" action="create.html" method="post" >
-            <!-- Add your form elements here -->
+            <label class="form-label" for="title">Title</label>
+            <input id="title-input" name="title" maxlength="50"/>
 
+            <label class="form-label" for="description">Description</label>
+            <textarea id="description-input" name="description"></textarea>
+
+            <label class="form-label" for="imageUrl">Image Url</label>
+            <input id="imageUrl-input" name="imageUrl" oninput="handleChange"/>
+
+            <div class="form-navigation">
+              <a href="/">
+                <img class="back-arrow" src="/img/back.svg" alt="back">
+              </a>
+              <button class="button submit-button" id="submit-button" type="submit">
+                <p>Create new</p>
+              </button>
+            </div>
           </form>
         </div>
       </div>
