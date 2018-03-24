@@ -6,7 +6,7 @@ const app = require('../../app');
 const Item = require('../../models/item');
 
 const {parseTextFromHTML, buildItemObject} = require('../test-utils');
-const {connectDatabaseAndDropData, diconnectDatabase} = require('../setup-teardown-utils');
+const {connectDatabaseAndDropData, disconnectDatabase} = require('../setup-teardown-utils');
 
 const findImageElementBySource = (htmlAsString, src) => {
   const image = jsdom(htmlAsString).querySelector(`img[src="${src}"]`);
@@ -22,7 +22,7 @@ describe('Server path: /items/create', () => {
 
   beforeEach(connectDatabaseAndDropData);
 
-  afterEach(diconnectDatabase);
+  afterEach(disconnectDatabase);
 
   // Write your describe blocks below:
 

@@ -5,11 +5,11 @@ const connectDatabaseAndDropData = async () => {
   await mongoose.connection.db.dropDatabase();
 };
 
-const diconnectDatabase = async () => {
+const disconnectDatabase = async () => {
   await mongoose.disconnect();
 };
 
 module.exports = {
   connectDatabaseAndDropData,
-  diconnectDatabase,
+  disconnectDatabase,
 };

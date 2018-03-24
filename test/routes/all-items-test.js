@@ -5,7 +5,7 @@ const {jsdom} = require('jsdom');
 const app = require('../../app');
 
 const {parseTextFromHTML, seedItemToDatabase} = require('../test-utils');
-const {connectDatabaseAndDropData, diconnectDatabase} = require('../setup-teardown-utils');
+const {connectDatabaseAndDropData, disconnectDatabase} = require('../setup-teardown-utils');
 
 const findImageElementBySource = (htmlAsString, src) => {
   const image = jsdom(htmlAsString).querySelector(`img[src="${src}"]`);
@@ -20,7 +20,7 @@ describe('Server path: /', () => {
 
   beforeEach(connectDatabaseAndDropData);
 
-  afterEach(diconnectDatabase);
+  afterEach(disconnectDatabase);
 
   describe('GET', () => {
     it('renders an item with a title and image', async () => {
