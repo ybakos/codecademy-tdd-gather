@@ -24,6 +24,30 @@ describe('Server path: /items/create', () => {
 
   afterEach(disconnectDatabase);
 
-  // Write your describe blocks below:
+  describe('GET', () => {
+    it('renders empty input fields', async () => {
+      const response = await request(app).get('/items/create');
+
+      const titleInput = jsdom(response.text).querySelector('input#title-input');
+      const imageUrlInput = jsdom(response.text).querySelector('input#imageUrl-input');
+      const descriptionTextarea = jsdom(response.text).querySelector('textarea#description-input');
+      assert.equal(titleInput.value, '');
+      assert.equal(imageUrlInput.value, '');
+      assert.equal(descriptionTextarea.value, '');
+    });
+  });
+
+  describe('POST', function () {
+    it('creates and renders a new item', async () => {
+      const item = buildItemObject();
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(item);
+      assert.include(parseTextFromHTML(response.text, '.item-title'), itemToCreate.title);
+      const imageElement = findImageElementBySource(response.text, itemToCreate.imageUrl);
+      assert.equal(imageElement.src, itemToCreate.imageUrl);
+    });
+  });
 
 });

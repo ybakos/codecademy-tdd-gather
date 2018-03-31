@@ -6,7 +6,7 @@ describe('User visits the create page', () => {
     it('sees it rendered', () => {
       const item = buildItemObject();
 
-      browser.url('/create.html');
+      browser.url('/items/create');
       browser.setValue('#title-input', item.title);
       browser.setValue('#description-input', item.description);
       browser.setValue('#imageUrl-input', item.imageUrl);
