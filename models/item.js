@@ -13,7 +13,9 @@ module.exports = mongoose.model(
       required: true
     },
     imageUrl: {
-
+      type: String,
+      required: true,
+      match: /http\:\/\//
     },
   })
 );

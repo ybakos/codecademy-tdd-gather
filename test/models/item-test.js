@@ -38,4 +38,22 @@ describe('Model: Item', () => {
     });
   });
 
+  describe('#imageUrl', () => {
+    it('should be a String', () => {
+      const imageUrlAsInteger = 42;
+      const item = new Item({imageUrl: imageUrlAsInteger});
+      assert.strictEqual(item.imageUrl, imageUrlAsInteger.toString());
+    });
+    it('is required', () => {
+      const item = new Item();
+      item.validateSync();
+      assert.equal(item.errors.imageUrl.message, 'Path `imageUrl` is required.');
+    });
+    it('is a valid url', () => {
+      const item = new Item({imageUrl: 'invalid url'});
+      item.validateSync();
+      assert.equal(item.errors.imageUrl.message, 'Path `imageUrl` is invalid (invalid url).');
+    });
+  });
+
 });
