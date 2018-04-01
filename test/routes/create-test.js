@@ -38,15 +38,14 @@ describe('Server path: /items/create', () => {
   });
 
   describe('POST', function () {
-    it('creates and renders a new item', async () => {
+    it('creates a new item', async () => {
       const item = buildItemObject();
       const response = await request(app)
         .post('/items/create')
         .type('form')
         .send(item);
-      assert.include(parseTextFromHTML(response.text, '.item-title'), itemToCreate.title);
-      const imageElement = findImageElementBySource(response.text, itemToCreate.imageUrl);
-      assert.equal(imageElement.src, itemToCreate.imageUrl);
+      const createdItem = await Item.findOne(item);
+      assert.isOk(createdItem, 'Item was not created in the database');
     });
   });
 
