@@ -25,4 +25,17 @@ describe('Model: Item', () => {
     });
   });
 
+  describe('#description', () => {
+    it('should be a String', () => {
+      const descriptionAsInteger = 42;
+      const item = new Item({description: descriptionAsInteger});
+      assert.strictEqual(item.description, descriptionAsInteger.toString());
+    });
+    it('is required', () => {
+      const item = new Item();
+      item.validateSync();
+      assert.equal(item.errors.description.message, 'Path `description` is required.');
+    });
+  });
+
 });

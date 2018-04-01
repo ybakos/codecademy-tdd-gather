@@ -9,7 +9,8 @@ module.exports = mongoose.model(
       required: true
     },
     description: {
-
+      type: String,
+      required: true
     },
     imageUrl: {
 
