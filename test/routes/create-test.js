@@ -47,6 +47,15 @@ describe('Server path: /items/create', () => {
       const createdItem = await Item.findOne(item);
       assert.isOk(createdItem, 'Item was not created in the database');
     });
+    it('redirects to /', async () => {
+      const item = buildItemObject();
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(item);
+      assert.equal(response.status, 302);
+      assert.equal(response.headers.location, '/');
+    });
   });
 
 });

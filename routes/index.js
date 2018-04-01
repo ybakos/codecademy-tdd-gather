@@ -13,8 +13,7 @@ router.get('/items/create', (req, res, next) => {
 
 router.post('/items/create', async (req, res, next) => {
   await Item.create(req.body);
-  const items = await Item.find({});
-  res.render('index', {items});
+  res.redirect('/');
 });
 
 module.exports = router;
