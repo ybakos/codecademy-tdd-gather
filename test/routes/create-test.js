@@ -56,6 +56,18 @@ describe('Server path: /items/create', () => {
       assert.equal(response.status, 302);
       assert.equal(response.headers.location, '/');
     });
+    it('displays an error when the item title is invalid', async () => {
+      const invalidItem = {description: 'fake description', imageUrl: 'https://fake.com'};
+      const response = await request(app)
+        .post('/items/create')
+        .type('form')
+        .send(invalidItem);
+      const createdItem = await Item.findOne(invalidItem);
+      // assert.deepEqual(await Item.find({}), []);
+      assert.isNotOk(createdItem, 'Invalid item should not have been created in the database');
+      assert.equal(response.status, 400);
+      assert.include(parseTextFromHTML(response.text, 'form'), 'required');
+    });
   });
 
 });

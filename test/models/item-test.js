@@ -12,6 +12,17 @@ describe('Model: Item', () => {
     await mongoose.disconnect();
   });
 
-  // Write your tests below:
+  describe('#title', () => {
+    it('should be a String', () => {
+      const titleAsInteger = 42;
+      const item = new Item({title: titleAsInteger});
+      assert.strictEqual(item.title, titleAsInteger.toString());
+    });
+    it('is required', () => {
+      const item = new Item();
+      item.validateSync();
+      assert.equal(item.errors.title.message, 'Path `title` is required.');
+    });
+  });
 
 });
