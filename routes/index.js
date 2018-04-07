@@ -23,4 +23,16 @@ router.post('/items/create', async (req, res, next) => {
   }
 });
 
+router.get('/items/:id', async (req, res, next) => {
+  const id = req.params.id;
+  const item = await Item.findById(id);
+  if (item) {
+    res.render('items/item', {item: item});
+  } else {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  }
+})
+
 module.exports = router;

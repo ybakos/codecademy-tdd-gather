@@ -15,13 +15,13 @@ describe('Server path: /items/:id', () => {
     const title = "Fake Item";
     const description = "Fake description";
     const imageUrl = "http://fake.com";
-    const fakeItem = {title, description, imageUrl};
+    const itemAttributes = {title, description, imageUrl};
 
-    await seedItemToDatabase(fakeItem);
+    const createdItem = await seedItemToDatabase(itemAttributes);
 
-    const response = await request(app).get(`/items/${fakeItem._id}`);
-    assert.include(parseTextFromHTML(response.text, '#item-title'), fakeItem.title);
-    assert.include(parseTextFromHTML(response.text, '#item-description'), fakeItem.description);
+    const response = await request(app).get(`/items/${createdItem._id}`);
+    assert.include(parseTextFromHTML(response.text, '#item-title'), createdItem.title);
+    assert.include(parseTextFromHTML(response.text, '#item-description'), createdItem.description);
 
   });
 
