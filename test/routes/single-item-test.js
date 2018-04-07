@@ -11,6 +11,18 @@ describe('Server path: /items/:id', () => {
 
   afterEach(disconnectDatabase);
 
-  // Write your test blocks below:
+  it('includes the item attributes in the response body', async () => {
+    const title = "Fake Item";
+    const description = "Fake description";
+    const imageUrl = "http://fake.com";
+    const fakeItem = {title, description, imageUrl};
+
+    await seedItemToDatabase(fakeItem);
+
+    const response = await request(app).get(`/items/${fakeItem._id}`);
+    assert.include(parseTextFromHTML(response.text, '#item-title'), fakeItem.title);
+    assert.include(parseTextFromHTML(response.text, '#item-description'), fakeItem.description);
+
+  });
 
 });
